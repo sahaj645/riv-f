@@ -2,14 +2,29 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const { test, survival } = require('../controllers/authController');
-const { joinTeam } = require('../controllers/jointeamController'); // Correct path to the controller
-const {CreateC}=require('../controllers/CreateCodeCortex');
-const{joinCodeCortex}=require('../controllers/JoinCodeCortexController.js');
-// Middleware setup
+const { joinTeam } = require('../controllers/jointeamController');
+const { CreateC } = require('../controllers/CreateCodeCortex');
+const { joinCodeCortex } = require('../controllers/JoinCodeCortexController.js');
+
+// Allowed frontend URLs
+const allowedOrigins = [
+  'https://riv-f.vercel.app',
+  'http://localhost:3001',
+  'http://localhost:3000',
+  'https://finalf-ksvn9mzw0-sahajs-projects-453c7c18.vercel.app',
+];
+
+// Middleware setup for CORS
 router.use(
   cors({
     credentials: true,
-    origin: 'https://tam-gravitas-vit.vercel.app',
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
   })
 );
 
@@ -18,10 +33,12 @@ router.get('/', test);
 
 // Route for handling Survival Showdown team creation
 router.post('/survival', survival); // For creating a new team
-//router.post('/CreatCodeCortex',createCodeCortex);
-// Route for handling joining a team
-router.post('/createCortex',CreateC);
-router.post('/joinTeam', joinTeam); // For joining a in survival showdown 
-router.post('/joinCortex',joinCodeCortex);
+
+// Routes for Code Cortex
+router.post('/createCortex', CreateC);
+router.post('/joinCortex', joinCodeCortex);
+
+// Route for handling joining a team in Survival Showdown
+router.post('/joinTeam', joinTeam);
 
 module.exports = router;

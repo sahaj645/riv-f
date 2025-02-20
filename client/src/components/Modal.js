@@ -31,7 +31,7 @@ const Modal = ({ isOpen, onClose }) => {
         <ol className="list-decimal list-inside space-y-2 font-light">
           <li>Fill up all the details mentioned.</li>
           <li>All the teammates should fill up the same team name and ID.</li>
-          <li>Team size: 2-4 members.</li>
+          <li>Team size: 3-4 members.</li>
           <li>After filling up all the details, click 'Submit'.</li>
           <li>YAY! You’re registered.</li>
         </ol>

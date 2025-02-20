@@ -34,7 +34,8 @@ export default function JoinTeam({ eventName }) {
     try {
       let response;
       if (eventName === "survival") {
-        response = await axios.post("https://tam-gravitas-api.vercel.app/joinTeam", formData);
+        response = await axios.post("https://riv-backend-9ifqklcoc-sahajs-projects-453c7c18.vercel.app/joinSurvival", formData);
+
       } else {
         response = await axios.post("https://tam-gravitas-api.vercel.app/joinCortex", formData);
       }
