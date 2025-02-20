@@ -54,7 +54,12 @@ export default function CreateTeam({ eventName }) {
     try {
       let response;
       if (eventName === "survival") {
-        response = await axios.post('https://riv-backend-b1ck04yg3-sahajs-projects-453c7c18.vercel.app/survival', updatedFormData);
+        response = await axios.post('https://riv-backend-ft8ek5pb9-sahajs-projects-453c7c18.vercel.app/survival', updatedFormData,{
+          withCredentials: true,
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
       } else {
         response = await axios.post('https://riv-backend-9ifqklcoc-sahajs-projects-453c7c18.vercel.app/createCortex', updatedFormData);
       }
