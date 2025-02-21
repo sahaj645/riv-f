@@ -7,6 +7,7 @@ const test = (req, res) => {
 
 // Function to handle team creation
 const survival = async (req, res) => {
+    axios.defaults.withCredentials = true;
     try {
         const { ParticipantName, RegNo, VITEmail, TeamName, teamId, teamStrength } = req.body;
 
