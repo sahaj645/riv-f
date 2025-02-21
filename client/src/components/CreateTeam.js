@@ -75,7 +75,7 @@ export default function CreateTeam() {
     if (isSubmitting) return;
     
     setIsSubmitting(true);
-
+    axios.defaults.withCredentials = true;
     try {
       const updatedFormData = {
         ...formData,
