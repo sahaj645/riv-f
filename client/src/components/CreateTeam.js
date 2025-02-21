@@ -10,15 +10,14 @@ import 'react-toastify/dist/ReactToastify.css';
 const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
-  }
+    'Access-Control-Allow-Origin': '*',
+  },
+  withCredentials: true
 });
 
-const API_ENDPOINTS = {
-  survival: 'https://riv-f-backend.vercel.app/survival',
-  cortex: 'https://riv-backend-9ifqklcoc-sahajs-projects-453c7c18.vercel.app/createCortex'
-};
+const API_ENDPOINT = 'https://riv-f-backend.vercel.app/survival';
 
-export default function CreateTeam({ eventName }) {
+export default function CreateTeam() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [randomNumber, setRandomNumber] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,24 +75,18 @@ export default function CreateTeam({ eventName }) {
     if (isSubmitting) return;
     
     setIsSubmitting(true);
-    
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: false // Set to true if your backend requires credentials
-    };
 
     try {
-      let response;
-      const endpoint = eventName === "survival" ? API_ENDPOINTS.survival : API_ENDPOINTS.cortex;
-      
       const updatedFormData = {
         ...formData,
         teamId: randomNumber
       };
 
-      response = await api.post(endpoint, updatedFormData, config);
+      const response = await api.post(API_ENDPOINT, updatedFormData, {
+        headers: {
+          'Origin': window.location.origin,
+        }
+      });
 
       if (response.status === 201) {
         toast.success(response.data.message || 'Team created successfully!');
@@ -113,6 +106,8 @@ export default function CreateTeam({ eventName }) {
           errorMessage = 'Authentication failed. Please try again.';
         } else if (error.response.status === 403) {
           errorMessage = 'Access denied. You may not have permission to perform this action.';
+        } else if (error.response.status === 0) {
+          errorMessage = 'CORS error: The server is not allowing cross-origin requests.';
         }
       }
       
