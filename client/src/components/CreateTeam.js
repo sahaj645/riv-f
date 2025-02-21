@@ -84,7 +84,8 @@ export default function CreateTeam() {
 
       const response = await api.post(API_ENDPOINT, updatedFormData, {
         headers: {
-          'Origin': window.location.origin,
+          //'Origin': window.location.origin,
+          'Content-Type': 'application/json'
         }
       });
 
