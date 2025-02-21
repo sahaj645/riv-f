@@ -15,18 +15,11 @@ const allowedOrigins = [
 ];
 
 // Middleware setup for CORS
-router.use(
-  cors({
-    credentials: true,
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    }
-  })
-);
+app.use(cors({
+  origin: 'https://riv-f-frontend.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Route for testing the server
 router.get('/', test);
