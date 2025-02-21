@@ -8,14 +8,19 @@ mongoose.connect('mongodb+srv://gravitastam2024:Sahil%40tam123@cluster0.inn1c.mo
     .then(() => console.log("DB Connected"))
     .catch(err => console.log("DB not connected", err));
 
-    app.use(cors({
-        origin: "https://riv-f-frontend.vercel.app/", 
-        methods: ['GET', 'POST', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true
-    }));
-    
+app.use(cors({
+    origin: "https://riv-f-frontend.vercel.app", // Removed trailing slash
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
+
 app.use(express.json());
+
+// Add a test route
+app.get('/', (req, res) => {
+    res.send('hi');
+});
 
 // Routes
 app.use('/', require('./routes/authroutes'));
