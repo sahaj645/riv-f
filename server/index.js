@@ -9,7 +9,7 @@ mongoose.connect('mongodb+srv://gravitastam2024:Sahil%40tam123@cluster0.inn1c.mo
     .catch(err => console.log("DB not connected", err));
 
     app.use(cors({
-        origin: "https://finalf-j5wvfv998-sahajs-projects-453c7c18.vercel.app", 
+        origin: "https://riv-f-frontend.vercel.app/", 
         methods: ['GET', 'POST', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true
