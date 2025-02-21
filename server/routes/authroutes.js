@@ -11,7 +11,7 @@ const allowedOrigins = [
   'https://riv-f.vercel.app',
   'http://localhost:3001',
   'http://localhost:3000',
-  'https://finalf-j5wvfv998-sahajs-projects-453c7c18.vercel.app',
+  'https://riv-f-frontend.vercel.app',
 ];
 
 // Middleware setup for CORS
