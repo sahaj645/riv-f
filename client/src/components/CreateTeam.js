@@ -54,7 +54,7 @@ export default function CreateTeam({ eventName }) {
     try {
       let response;
       if (eventName === "survival") {
-        response = await axios.post('https://riv-backend-ft8ek5pb9-sahajs-projects-453c7c18.vercel.app/survival', updatedFormData,{
+        response = await axios.post('https://riv-f-backend.vercel.app//survival', updatedFormData,{
           withCredentials: true,
           headers: {
               'Content-Type': 'application/json'
